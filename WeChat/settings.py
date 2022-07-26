@@ -7,15 +7,20 @@ SECRET_KEY = 'django-insecure-1)ye0qw(p^=@6@k%b51@flv9=x59!9b*hm)!ufmr35uttvnzn4
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 INSTALLED_APPS = [
+    'channels',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'rest_framework.authtoken',
 
     'chat.apps.ChatConfig',
 ]
@@ -50,6 +55,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'WeChat.wsgi.application'
+ASGI_APPLICATION = 'WeChat.routers.application'
 
 DATABASES = {
     'default': {
@@ -73,6 +79,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -81,7 +93,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static_root")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")

@@ -122,15 +122,9 @@ class ChatConsumer(AsyncConsumer):
                 "type": "websocket.close"
             })
             return 
-
-        user = (dict((x.split('=') for x in self.scope['query_string'].decode().split("&")))).get('user', None)
-
-        user = await get_user_by_username(user)
-        chat_room = await get_room(curr_user, user)
-        print(chat_room)
+        chat_room = f"room_{curr_user.id}"
         self.room = chat_room
-        self.auth_user = user
-        chat_room = f"room_{chat_room.id}"
+        self.auth_user = curr_user
         self.chat_room = chat_room
 
         await self.channel_layer.group_add(
