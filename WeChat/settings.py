@@ -16,6 +16,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'chat.apps.ChatConfig',
 ]
 
 MIDDLEWARE = [
@@ -30,10 +32,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'WeChat.urls'
 
+TEMPLATE_DIR1 = os.path.join(BASE_DIR, "templates")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR1, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,5 +82,12 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static_root")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
+MEDIA_URL = "/images/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
