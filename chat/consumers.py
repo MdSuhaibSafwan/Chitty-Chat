@@ -53,10 +53,11 @@ class ChatConsumer(AsyncConsumer):
     async def new_message(self, data):
         print(data, "inside new message")
         msg_dict = {
-            "post": data.get("post"),
             "text": data.get("text"),
+            "to_user": data.get("user"),
+            "from_user": self.scope["user"],
         }
-        await save_message(self.room, msg_dict, self.scope["user"])
+        await save_message(msg_dict)
 
     #     try:
     #         await send_message_online(self.room, self.auth_user, data['message'],

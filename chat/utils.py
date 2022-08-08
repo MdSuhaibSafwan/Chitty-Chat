@@ -15,10 +15,15 @@ def get_room(user1, user2):
 
 
 @sync_to_async
-def save_message(room, message_dict, user):
-    print(message_dict)
-    message_obj = ChatMessage(post=message_dict.get("post"), text=message_dict.get("text"))
-    message_obj.user = user
+def save_message(message_dict):
+    print("UTILS LINE 19", message_dict)
+    # return 
+    from_user = message_dict.get("from_user")
+    to_user_id = message_dict.get("to_user")
+    to_user = User.objects.get(id=to_user_id)
+    room = ChatRoom.objects.get_or_create_room(user1=from_user, user2=to_user)
+    message_obj = ChatMessage(text=message_dict.get("text"))
+    message_obj.user = from_user
     message_obj.room = room
     message_obj.save()
 
