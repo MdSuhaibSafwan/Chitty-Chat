@@ -3,6 +3,11 @@
 //     "text": "hello",
 // })
 
+socket.onmessage = function(e){
+    var data = JSON.parse(e.data);
+    console.log(data);
+};
+
 var btn = document.getElementById("btn-send");
 console.log(btn);
 btn.addEventListener("click", (e) => {
@@ -12,3 +17,6 @@ btn.addEventListener("click", (e) => {
         "user": "2",
     }))
 })
+
+
+

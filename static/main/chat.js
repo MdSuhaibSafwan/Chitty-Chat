@@ -11,10 +11,6 @@ url = `${protocol}//${loc.host}/room/?token=${auth_token}`;
 
 var socket = new WebSocket(url);
 
-socket.onmessage = function(e){
-    console.log(e);
-};
-
 socket.onopen = function(e){
     console.log(e)
 };
