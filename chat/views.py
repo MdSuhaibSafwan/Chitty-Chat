@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from rest_framework.authtoken.models import Token
+from .models import ChatRoom, ChatMessage
 
 
 def index(request):

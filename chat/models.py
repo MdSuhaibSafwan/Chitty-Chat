@@ -13,6 +13,9 @@ def uuid_without_dash():
 class RoomManager(Manager):
 
     def get_or_create_room(self, user1, user2):
+        if user1 == user2:
+            raise ValueError("Both user cannot be same")
+
         qs = self.filter(Q(user1=user1, user2=user2) | Q(user1=user2, user2=user1))
         self.filtered_qs = qs
         if qs.exists():

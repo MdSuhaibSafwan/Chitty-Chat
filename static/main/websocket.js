@@ -1,7 +1,27 @@
-// socket.send({
-//     "command": "new_message",
-//     "text": "hello",
-// })
+var loc = location;
+
+var protocol = "ws:"
+if (loc.protocol == "https:"){
+    protocol = "wss:"
+};
+
+var auth_token = token;
+
+url = `${protocol}//${loc.host}/room/?token=${auth_token}`;
+
+var socket = new WebSocket(url);
+
+socket.onopen = function(e){
+    console.log(e)
+};
+
+socket.onerror = function(e){
+    console.log(e);
+};
+
+socket.onclose = function(e){
+    console.log(e);
+};
 
 socket.onmessage = function(e){
     var data = JSON.parse(e.data);

@@ -1,20 +1,21 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model; User = get_user_model()
 
 
 class AuthTokenSerializer(serializers.Serializer):
     username = serializers.CharField(
-        label=_("Username"),
+        label=("Username"),
         write_only=True
     )
     password = serializers.CharField(
-        label=_("Password"),
+        label=("Password"),
         style={'input_type': 'password'},
         trim_whitespace=False,
         write_only=True
     )
     token = serializers.CharField(
-        label=_("Token"),
+        label=("Token"),
         read_only=True
     )
 
@@ -38,3 +39,10 @@ class AuthTokenSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+
+
+class UserForRoomSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        exclude = ["password", "date_joined", "groups", "user_permissions"]
